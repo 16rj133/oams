@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zufe.oams.mapper.WorkSubmissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zufe.oams.pojo.WorkSubmission">
+        <id column="id" property="id" />
+        <result column="workno" property="workNo" />
+        <result column="studentno" property="studentNo" />
+        <result column="address" property="address" />
+        <result column="submissiontime" property="submissionTime" />
+        <result column="status" property="status" />
+    </resultMap>
+    <update id="correctionWork">
+        update worksubmission
+        set grade = #{grade}
+        where id = #{id}
+    </update>
+    <select id="selectWorkSubmission" resultType="com.zufe.oams.dto.WorkSubmissionDto">
+      select distinct ws.id as id, ws.workno as workno, wr.workname as workname, wr.courseno as courseno,
+       cou.coursename as coursename, stu.id as studentno, stu.name as student_name, cla.cid as classes_no,
+      cla.cname as classes_name,ws.submissiontime as submission_time, ws.address as address,
+       IFNULL(ws.status,0) as status,cou.tid as teacher_no,tec.name as teacher_name, wr.description as description,
+        wr.releasetime as release_time,ws.grade AS grade
+      from worksubmission as ws,
+      workrelease as wr,
+      course as cou,
+      student as stu,
+      classes as cla,
+      teacher as tec
+      where ws.workno = wr.workno
+      and ws.studentno = stu.id
+      and wr.courseno = cou.courseid
+      and stu.classesNo = cla.cid
+      and cou.tid = tec.id
+        <if test='workNo!=null and workNo != "" '>
+            and  ws.workno = #{workNo}
+        </if>
+        <if test='keyword!=null and keyword!= "" '>
+            and wr.workname like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test='teacherNo!=null and teacherNo != "" '>
+            and  cou.tid = #{teacherNo}
+        </if>
+        <if test='courseNo!=null and courseNo != "" '>
+            and  wr.courseno = #{courseNo}
+        </if>
+        <if test='studentNo!=null and studentNo != "" '>
+            and  ws.studentno = #{studentNo}
+        </if>
+        <if test='status!=null and status != "" '>
+            and  ws.status = #{status}
+        </if>
+        <if test='classesNo!=null and classesNo != "" '>
+            and  stu.classesNo = #{classesNo}
+        </if>
+    </select>
+    <select id="selectByWorkNoStudentNo" resultType="com.zufe.oams.pojo.WorkSubmission">
+        select * from worksubmission
+        where workno = #{workNo}
+        and studentno = #{studentNo}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,29 @@
+http://sc.chinaz.com/tag_jiaoben/YuanXing.html
+http://www.miniui.com/demo/#src=datagrid/celledit.html
+https://www.oschina.net/news/21693/10-best-android-file-manager
+http://blog.csdn.net/qq_21430549/article/details/51212977
+https://www.cnblogs.com/prescheng/p/4945973.html
+http://bbs.csdn.net/topics/370126776
+https://www.jianshu.com/p/1414101858c1//浏览打卡文件
+http://www.jb51.net/article/119794.htm上传成功例子
+https://wenku.baidu.com/view/d2c36ef4aaea998fcc220ef0.html英文范文
+https://www.bilibili.com/video/av21180880/说散就散
+androiddemohttp://www.jiandaima.com/blog/Android-demo
+https://blog.csdn.net/waqdon/article/details/42171409京东按钮
+https://blog.csdn.net/qibin0506/article/details/41776165
+https://webcode.ctfile.com/fs/ZA1161370150京东商城源码
+https://github.com/sorrowise/douban_top250电影数据
+https://zhuanlan.zhihu.com/p/29498852电影数据
+https://blog.csdn.net/sinat_31057219/article/details/71518123jsonarray
+https://blog.csdn.net/andycpp/article/details/1327147/ 软件质量测试
+http://www.cnblogs.com/yangxia-test/p/3991572.html 软件质量测试
+https://blog.csdn.net/ss1168805219/article/details/52426329
+https://wenku.baidu.com/view/f22de94d27d3240c8447ef84.html2009-2011
+http://www.soutu123.com/png/app/  APP图标
+https://tieba.baidu.com/p/2283846240?red_tag=2497040076墨刀
+
+
+<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=b0772thin8c" allowFullScreen="true"></iframe>嵌入视频
+
+
+最大质数因子，你给我长点记性 ，只要一个质数因子不能是合数，就是最大的因子。

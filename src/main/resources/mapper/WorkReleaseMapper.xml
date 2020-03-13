@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zufe.oams.mapper.WorkReleaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zufe.oams.pojo.WorkRelease">
+        <id column="id" property="id" />
+        <result column="workno" property="workNo" />
+        <result column="workname" property="workName" />
+        <result column="courseno" property="courseNo" />
+        <result column="description" property="description" />
+        <result column="releasetime" property="releaseTime" />
+        <result column="address" property="address" />
+        <result column="finishdays" property="finishdays" />
+    </resultMap>
+    <select id="selectWorkRelease" resultType="com.zufe.oams.dto.WorkReleaseDto">
+        select distinct workrelease.id, workrelease.workno, workrelease.workname, workrelease.courseno,
+        course.coursename, workrelease.description, workrelease.releasetime, workrelease.address,workrelease.finishdays,
+        IFNULL(submission.num,0) submission_num
+        from course,workrelease
+        left join
+        (select workno, count(*) as num
+          from worksubmission
+          group by workno
+        ) as submission
+        on workrelease.workno = submission.workno
+        where course.courseid = workrelease.courseno
+        <if test='teacherNo != null and teacherNo != "" '>
+          and course.tid = #{teacherNo}
+        </if>
+        <if test='keyword != null and keyword!=""'>
+            and workname like CONCAT('%', #{keyword}, '%')
+        </if>
+
+    </select>
+    <select id="selectWorkReleaseForStudent" resultType="com.zufe.oams.dto.WorkReleaseDto">
+        select distinct workrelease.id, workrelease.workno, workrelease.workname, workrelease.courseno,
+        course.coursename, workrelease.description, workrelease.releasetime, workrelease.address,
+        IFNULL(submission.status,0) status, course.tid as teacher_no, teacher.name as teacher_name
+        from course,teacher,workrelease
+        left join
+        (select workno, status
+        from worksubmission
+        where worksubmission.studentno = #{studentNo}
+        ) as submission
+        on workrelease.workno = submission.workno
+        where course.courseid = workrelease.courseno
+        and teacher.id = course.tid
+        and workrelease.courseno in (select sc.courseid from sc where sc.studentid = #{studentNo})
+        <if test="keyword != null and keyword!=''">
+            and workname like CONCAT('%', #{keyword}, '%')
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zufe.oams.mapper.TeacherMapper">
+
+  <!-- 通用查询映射结果 -->
+  <resultMap id="BaseResultMap" type="com.zufe.oams.pojo.Teacher">
+    <id column="id" property="id" />
+    <result column="password" property="password" />
+    <result column="name" property="name" />
+    <result column="sex" property="sex" />
+    <result column="age" property="age" />
+    <result column="phone" property="phone" />
+    <result column="email" property="email" />
+  </resultMap>
+  <update id="updatePassword">
+        update teacher
+        set password = #{newPassword}
+        where id = #{id}
+    </update>
+  <select id="selectById" resultType="com.zufe.oams.pojo.Teacher">
+        select * from teacher
+        where id = #{id}
+    </select>
+  <select id="selectTeacher" resultType="com.zufe.oams.pojo.Teacher">
+    <if test='type==null or type!="1"'>
+      select * from teacher
+      where 1 = 1
+    </if>
+    <if test='type=="1"'>
+      select distinct teacher.id,teacher.password,teacher.name,teacher.sex,teacher.age,teacher.phone,teacher.email
+      from teacher
+    </if>
+    <!-- <if test="classesNo!=null and classesNo!=''">
+         and student.classesNo = #{classesNo}
+     </if>-->
+    <if test="keyword != null and keyword!=''">
+      and teacher.id like CONCAT('%', #{keyword}, '%')
+      or teacher.name like CONCAT('%', #{keyword}, '%')
+    </if>
+  </select>
+
+</mapper>

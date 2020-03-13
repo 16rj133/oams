@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zufe.oams.mapper.ClassesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zufe.oams.pojo.Classes">
+        <id column="cid" property="cid" />
+        <result column="cname" property="cname" />
+    </resultMap>
+    <select id="selectByCid" resultType="com.zufe.oams.pojo.Classes">
+        select *
+        from classes
+        where cid = #{cid}
+    </select>
+    <select id="selectClasses" resultType="com.zufe.oams.pojo.Classes">
+        <if test='type==null or type=="0"'>
+            select * from classes
+            where 1 = 1
+        </if>
+        <if test='type=="1"'>
+            select distinct cid,cname
+            from classes where 1=1
+        </if>
+        <if test='keyword != null and keyword!=""'>
+            and classes.cid like CONCAT('%', #{keyword}, '%')
+            or classes.cname like CONCAT('%', #{keyword}, '%')
+        </if>
+    </select>
+
+</mapper>

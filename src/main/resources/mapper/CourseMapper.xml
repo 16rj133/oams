@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zufe.oams.mapper.CourseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zufe.oams.pojo.Course">
+        <id column="courseid" property="courseId" />
+        <result column="coursename" property="courseName" />
+        <result column="tid" property="tid" />
+    </resultMap>
+    <select id="selectByCourseId" resultType="com.zufe.oams.pojo.Course">
+        select * from course
+        where courseid = #{courseid}
+    </select>
+    <select id="selectCourse" resultType="com.zufe.oams.pojo.Course">
+        <if test='type==null or type!="1"'>
+            select * from course
+            where 1 = 1
+        </if>
+        <if test='type=="1"'>
+            select distinct course.courseid,course.coursename,course.tid
+            from course where 1 = 1
+        </if>
+        <!-- <if test="classesNo!=null and classesNo!=''">
+             and student.classesNo = #{classesNo}
+         </if>-->
+        <if test='tid!=null and tid!=""'>
+            and tid = #{tid}
+        </if>
+        <if test="keyword != null and keyword!=''">
+            and course.coursename like CONCAT('%', #{keyword}, '%')
+            or course.courseid like CONCAT('%', #{keyword}, '%')
+        </if>
+    </select>
+    <select id="selectByTeacher" resultType="com.zufe.oams.pojo.Course">
+        select * from course
+        where tid = #{tid}
+    </select>
+    <!--正确-->
+    <delete id="deleteByCourseid" >
+        delete from course where courseid = #{courseid}
+    </delete>
+</mapper>
