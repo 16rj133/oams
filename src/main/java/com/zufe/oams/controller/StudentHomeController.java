@@ -57,7 +57,7 @@ public class StudentHomeController {
     /*
         通过langId获取编程语言信息
      */
-    @RequestMapping("/getLanguageInfoById")
+    @RequestMapping("/undefined/getLanguageInfoById")
     public ServerResponse getLanguageInfoById(@RequestParam("langId")Integer langId ){
         ProgramingLanguage programingLanguage = studentHomeService.getLanguageInfoById(langId);
         if(programingLanguage != null){
@@ -72,7 +72,7 @@ public class StudentHomeController {
     /*
        通过langId获取试卷信息
     */
-    @RequestMapping("/getPapersInfo")
+    @RequestMapping("/undefined/getPapersInfo")
     public ServerResponse getPapersInfo(@RequestParam("langId")Integer langId ){
         List<Paper> resultList = studentHomeService.getPapersInfo(langId);
         if(resultList != null && resultList.size() > 0){
@@ -90,7 +90,7 @@ public class StudentHomeController {
     /*
         请求获取当前试卷状态，即是否已完成
      */
-    @RequestMapping(value = "/getCurrentPaperStatus", method = RequestMethod.POST)
+    @RequestMapping(value = "/undefined/getCurrentPaperStatus", method = RequestMethod.POST)
     public ServerResponse getCurrentPaperStatus(@RequestBody(required = false)StudentPaperScore studentPaperScore){
         String sno = studentPaperScore.getSno();
         Integer paperId = studentPaperScore.getPaperId();
@@ -106,7 +106,7 @@ public class StudentHomeController {
     /*
        通过paperId获取试卷及单选题、多选题、判断题和填空题信息
     */
-    @RequestMapping("/getPapersInfoByPaperId")
+    @RequestMapping("/undefined/getPapersInfoByPaperId")
     public ServerResponse getPapersInfoByPaperId(@RequestParam("paperId")Integer paperId ){
         Paper paper = studentHomeService.getPapersInfoByPaperId(paperId);
         Map<String, Integer> numObj = studentHomeService.getPaperQueNumByPaperId(paperId);
@@ -134,7 +134,7 @@ public class StudentHomeController {
     /*
         插入学生成绩表成绩信息，包含三个字段，考试开始时间、学号和试卷id
      */
-    @RequestMapping(value = "/insertStudentPaperScore", method = RequestMethod.POST)
+    @RequestMapping(value = "/undefined/insertStudentPaperScore", method = RequestMethod.POST)
     public ServerResponse insertStudentPaperScore(@RequestBody(required = false)StudentPaperScore studentPaperScore){
         studentPaperScore.setStartTime(new Date());
         int result = studentHomeService.insertStudentPaperScore(studentPaperScore);
