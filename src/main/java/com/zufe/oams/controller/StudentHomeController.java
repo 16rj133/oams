@@ -147,7 +147,7 @@ public class StudentHomeController {
     /*
        插入学生成绩表成绩信息和学生试卷答题记录信息
     */
-    @RequestMapping(value = "/submitPaper", method = RequestMethod.POST)
+    @RequestMapping(value = "/undefined/submitPaper", method = RequestMethod.POST)
     public ServerResponse submitPaper(@RequestBody Map<String, Object> obj){
 
         //学号
@@ -180,7 +180,7 @@ public class StudentHomeController {
     /*
         请求获取当前试卷的成绩报告
      */
-    @RequestMapping(value = "/getScoreReport")
+    @RequestMapping(value = "/undefined/getScoreReport")
     public ServerResponse getScoreReport(@RequestParam("sno")String sno,
                                          @RequestParam("paperId")Integer paperId) {
 

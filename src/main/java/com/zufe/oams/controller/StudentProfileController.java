@@ -143,7 +143,7 @@ public class StudentProfileController {
     /*
       通过学号sno获取学生试卷成绩信息
    */
-    @RequestMapping("/getPaperScoreInfo")
+    @RequestMapping("/undefined/getPaperScoreInfo")
     public ServerResponse getPaperScoreInfo(@RequestParam("sno")String sno ){
         List<Map<String, Object>> resultList = studentProfileService.getPaperScoreInfoBySno(sno);
         if(resultList != null && resultList.size() > 0){
