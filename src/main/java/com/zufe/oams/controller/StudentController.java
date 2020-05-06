@@ -66,6 +66,7 @@ public class StudentController {
     @ResponseBody
     public Response updateStudent(@RequestBody Student student) {
         studentService.updateStudent(student);
+        System.out.println(666);
         return ResponseUtil.success();
     }
 
